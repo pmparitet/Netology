@@ -1,0 +1,44 @@
+CREATE TABLE
+films (
+    title VARCHAR, 
+    film_id SERIAL UNIQUE,
+    country VARCHAR,
+    box_office INTEGER,
+    release_date TIMESTAMP
+);
+
+
+INSERT INTO films
+    VALUES ('Игры разума', 1, 'США', 313542341, '2001-12-13'::timestamp),
+    ('Орел Девятого легиона', 2, 'США', 27122040, '2011-02-09'::timestamp),
+    ('Стартрек: Бесконечность', 3, 'США, Гонконг, Китай', 343471816, '2016-07-20'::timestamp),
+    ('Механик: Воскрешение', 4, 'Франция, США', 125729635, '2016-8-22'::timestamp),
+    ('007: Координаты «Скайфолл»', 5, 'Великобритания, США', 1108561013, '2012-10-23'::timestamp);
+
+CREATE TABLE
+persons (
+    person_id SERIAL UNIQUE,
+    fio VARCHAR
+);
+
+
+INSERT INTO persons
+    VALUES (6,'Рассел Кроу'),
+    (7,'Ченнинг Татум'),
+    (8,'Крис Пайн'),
+    (9,'Джейсон Стэйтем'),
+    (10,'Дэниэл Крэйг');
+
+CREATE TABLE
+persons2content (
+    person_id SERIAL, 
+    film_id SERIAL, 
+    person_type VARCHAR
+);
+
+INSERT INTO persons2content
+    VALUES (12,1,'режисёр'),
+    (13,2,'актёр'),
+    (14,3,'режисёр'),
+    (15,4,'актёр'),
+    (16,5,'актёр');
