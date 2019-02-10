@@ -2,9 +2,16 @@
 SELECT
     userId,
     movieId,
-    (rating - MIN(rating) OVER (PARTITION BY userId))/(MAX(rating) OVER (PARTITION BY userId)) normed_rating,
+    (rating - MIN(rating) OVER (PARTITION BY userId))/(MAX(rating) OVER (PARTITION BY userId) - MIN(rating) OVER (PARTITION BY userId)) normed_rating,
     rating - AVG(rating) OVER (PARTITION BY userId) avg_rating
 FROM public.ratings
+WHERE userId IN (
+    SELECT
+        userId
+    FROM ratings
+    GROUP BY userId
+    HAVING COUNT(rating) > 1 and MAX(rating) > MIN(rating)
+)
 ORDER BY userId, rating DESC
 LIMIT 30;
 
